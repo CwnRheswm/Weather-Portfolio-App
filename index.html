@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+	<title>Weather Portfolio App</title>
+	<meta name="viewport" charset="utf-8">
+	<link href="dist/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<!--Template for Current Weather Board-->
+	<script type="text/template" id="tmpl-current">
+	</script>
+
+	<!--Template for Forecast Weather Board-->
+	<script type="text/template" id="tmpl-forecast">
+	</script>
+
+	<!--Template for Forecast Board Parts-->
+	<script type="text/template" id="tmpl-forecast-day">
+	</script>
+
+	<!--Template for History Board-->
+	<script type="text/template" id="tmpl-history">
+	</script>
+
+	<script>
+		var require = {urlArgs: "bust="+(new Date()).getTime()}
+	</script>
+	<script src="node_modules/requirejs/require.js" data-main="build/main"></script>
+</body>
+</html>
