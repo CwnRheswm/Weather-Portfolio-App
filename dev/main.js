@@ -10,7 +10,7 @@ require.config({
 });
 
 require([
-	'views/weather-app-view'
+	'WeatherApp/weather-app-view.min'
 ], function(WeatherAppView){
 	'use strict';
 	new WeatherAppView();

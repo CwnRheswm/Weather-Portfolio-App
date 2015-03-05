@@ -1,10 +1,23 @@
 <html lang="en">
 <head>
 	<title>Weather Portfolio App</title>
-	<meta name="viewport" charset="utf-8">
-	<link href="dist/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
+	<link href="build/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div class='container'>
+		<section id='weather-app'>
+			<div class="hero-unit">
+				<div class="form-group">
+					<input id='city-search' class="form-control" placeholder='Enter A City' autofocus>
+				</div>
+				<div class='container'>
+					<a href='#' id="current-btn" class="btn btn-large btn-warning col-xs-3">Current</a>
+					<span class="col-xs-1"></span>
+					<a href='#' id='forecast-btn' class='btn btn-large btn-warning col-xs-3'>Forecast</a>
+					<span class="col-xs-1"></span>
+					<a href="#" id='history-btn' class='btn btn-large btn-warning col-xs-3'>History</a>
+				</div>
 
 	<!--Template for Current Weather Board-->
 	<script type="text/template" id="tmpl-current">
@@ -25,6 +38,7 @@
 	<script>
 		var require = {urlArgs: "bust="+(new Date()).getTime()}
 	</script>
-	<script src="node_modules/requirejs/require.js" data-main="build/main"></script>
+	<script src="node_modules/requirejs/require.js" data-main="build/main.min"></script>
+	<script src="http://localhost:35729/livereload.js"
 </body>
 </html>
