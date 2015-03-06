@@ -35,11 +35,15 @@ module.exports = function(grunt){
 			}
 		},
 		cssmin: {
-			minify: {
+			options: {
+				processImport: true,
+				relativeTo: "./"
+			},
+			target: {
 				expand: true,
 				cwd: "dev/",
-				src: ['**/*.css', '!**/*.min.css'],
-				dest: './',
+				src: ['**/*.css','!**/*.min.css'],
+				dest: 'build/',
 				ext: '.min.css'
 			}
 		},
@@ -68,7 +72,7 @@ module.exports = function(grunt){
 				options: {
 					livereload: true,
 				},
-				files: ['index.html','build/**/*']
+				files: ['./index.html','build/**/*']
 			},
 			concat: {
 				files: ['dev/**/*.min.js'],
@@ -80,7 +84,7 @@ module.exports = function(grunt){
 			},
 			cssmin: {
 				files: ['dev/**/*.css','!dev/**/*.min.css'],
-				tasks: ['cssmin:minifiy']
+				tasks: ['cssmin:target']
 			},
 			uglify: {
 				files: ['dev/**/*.js','!dev/**/*.min.js'],
