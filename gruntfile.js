@@ -68,7 +68,7 @@ module.exports = function(grunt){
 				options: {
 					livereload: true,
 				},
-				files: ['*']
+				files: ['index.html','build/**/*']
 			},
 			concat: {
 				files: ['dev/**/*.min.js'],
