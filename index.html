@@ -2,33 +2,55 @@
 <head>
 	<title>Weather Portfolio App</title>
 	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
-	<link href="build/main.min.css" rel="stylesheet" type="text/css">
 	<link href="build/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="build/main.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class='container'>
 		<section id='weather-app'>
-			<div class="hero-unit">
+			<div class="board">
 				<div class="form-group">
 					<input id='city-search' class="form-control" placeholder='Enter A City' autofocus>
 				</div>
-				<div class='container'>
-					<a href='#' id="current-btn" class="btn btn-large btn-warning col-xs-3">Current</a>
-					<span class="col-xs-1"></span>
-					<a href='#' id='forecast-btn' class='btn btn-large btn-warning col-xs-3'>Forecast</a>
-					<span class="col-xs-1"></span>
-					<a href="#" id='history-btn' class='btn btn-large btn-warning col-xs-3'>History</a>
+				<div class="container">
+					<div class="span12">
+						<a href='#' id="current-btn" class="btn btn-chalk btn-medium col-xs-3">Current</a>
+						<a href='#' id='forecast-btn' class='btn btn-chalk btn-medium col-xs-3'>Forecast</a>
+						<a href="#" id='history-btn' class='btn btn-chalk btn-medium col-xs-3'>History</a>
+					</div>
 				</div>
 			</div>
+			<div id="weather-current"></div>
 		</section>
 	</div>
 
 	<!--Template for Current Weather Board-->
 	<script type="text/template" id="tmpl-current">
+		<div class="board">
+			<span class="current-hero cols-xs-4">
+				<span class="sky-icon <%= skyIcon %> cols-xs-2"></span>
+				<span class="temp cols-xs-2"><%= temperature %>&deg</span>
+			</span>
+			<span class="current-details">
+				<div>
+					<h4 class='location'><%= city %>, <%= state %>: <%= latitude %>, <%= longitude %></h4>
+				</div>
+				<div>
+					<img class="wind-icon <%= windIcon %>">
+					<span class="wind-speed"><%= windSpeed %> <%= windUnits %></span>
+					<span class="wind-direction <%= windDirection %>"></span>
+				</div>
+				<div>
+					<span class='max-temp'>Max: <%= maxTemp %></span>
+					<span class='min-temp'>Min: <%= minTemp %></span>
+				</div>
+			</span>
+		</div>
 	</script>
 
 	<!--Template for Forecast Weather Board-->
 	<script type="text/template" id="tmpl-forecast">
+		<span class="sky-icon <%= skyIcon %>"></span>
 	</script>
 
 	<!--Template for Forecast Board Parts-->

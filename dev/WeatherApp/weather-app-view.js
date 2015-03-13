@@ -3,8 +3,10 @@ define([
 	'underscore',
 	'backbone',
 	'../Geocode/geocodes.min',
-	'../Geocode/geocodeView.min'
-], function($,_,Backbone,Geocodes,GeocodeView){
+	'../Geocode/geocodeView.min',
+	'../Weather/weathers.min',
+	'../Weather/weatherView.min'
+], function($,_,Backbone,Geocodes,GeocodeView,Weathers,WeatherView){
 	'use strict';
 
 	var WeatherAppView = Backbone.View.extend({
@@ -15,16 +17,36 @@ define([
 		},
 		initialize: function() {
 			this.$input = this.$('#city-search');
-			this.$current = $('weather-current');
+			this.$current = $('#weather-current');
 			
 			this.geocodes = new Geocodes();
-			this.listenTo(this.geocodes, 'change:ready', this.addGeocode)
+			this.listenTo(this.geocodes, 'change:ready', this.addGeocode);
+
+			this.weathers = new Weathers();
+			this.listenTo(this.weathers, 'change:ready', this.addWeather);
 		},
 		render: function() {
+			if (this.weathers.length) {
+				this.$current.show();
+			} else {
+				this.$current.hide();
+			}
 
+		},
+		addWeather: function(weather) {
+			var view = new WeatherView({ model: weather });
+			this.$current.append(view.render().el);
 		},
 		addGeocode: function(geocode) {
 			var view = new GeocodeView({ model: geocode });
+			var input = this.geocodes.models[0];
+			this.weathers.create({
+				city: input.get('city'),
+				state: input.get('state'),
+				latitude: input.get('latitude'),
+				longitude: input.get('longitude'),
+			});
+			console.log(input);
 		},
 		retrieveCoordinates: function(location) {
 			this.geocodes.create({

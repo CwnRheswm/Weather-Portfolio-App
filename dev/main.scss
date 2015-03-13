@@ -1,0 +1,97 @@
+@font-face {
+	font-family: chalk;
+	src: url('../Images/Colored Crayons.ttf');
+}
+
+body {
+	background-color: #F0EAD6;
+	font-family: 'chalk';
+	color: #fff;
+}
+.container {
+	padding: 0;
+}
+.btn{
+	color: #fff;
+	margin-left: 6.25%;
+	padding: 6px 0;
+	border-image: url('../Images/chalk_button.png') 30 stretch;
+	border-width: 8px;
+	&:hover {
+		border-image: url("../Images/chalk_button_hover.png") 30 stretch;
+		color: #fcc845;
+	}
+	&:active {
+		border-image: url("../Images/chalk_button_active.png") 30 stretch;
+		font-weight: 900;
+	}
+};
+.board {
+	background-image: url("../Images/slate_board.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 15px 35px;
+	border-image: url("../Images/wood_frame.png") 40 stretch;
+	border-width: 15px;
+	input {
+		color: #fff;
+		background-color: transparent;
+	};
+}
+
+.sky-icon{
+	&.clear-day{
+		background-image: url("../Images/swirly_clear.png");
+	}
+	&.clear-night{
+		background-image: url("../Images/swirly_clear_night.png");
+	}
+	&.cloudy {
+		background-image: url("../Images/swirly_cloudy.png");
+		&.night {
+			background-image: url("../Images/swirly_cloudy_night.png");
+		}
+	}
+	&.fog {
+		background-image: url("../Images/swirly_foggy.png");
+		&.night {
+			background-image: url("../Images/swirly_foggy_night.png");
+		}
+	}
+	&.heavy-rain {
+		background-image: url("../Images/swirly_heavy_rain.png");
+		&.night {
+			background-image: url("../Images/swirly_heavy_rain_night.png");
+		}
+	}
+	&.rain {
+		background-image: url("../Images/swirly_light_rain.png");
+		&.night {
+			background-image: url("../Images/swirly_light_rain_night.png");
+		}
+	}
+	&.partly-cloudy-day {
+		background-image: url("../Images/swirly_partly_cloudy.png");
+	}
+	&.partly-cloud-night {
+		background-image: url("../Images/swirly_partly_cloudy_night.png");
+	}
+	&.sleet {
+		background-image: url("../Images/swirly_sleet.png");
+		&.night {
+			background-image: url("../Images/swirly_sleet_night.png");
+		}
+	}
+	&.snow {
+		background-image: url("../Images/swirly_snowy.png");
+		&.night {
+			background-image: url("../Images/swirly_snowy_night.png");
+		}
+	}
+	&.storm {
+		background-image: url("../Images/swirly_storm.png");
+		&.night {
+			background-image: url("../Images/swirly_storm_night.png");
+		}
+	}
+}

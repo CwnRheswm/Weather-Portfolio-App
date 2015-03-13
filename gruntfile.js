@@ -53,6 +53,16 @@ module.exports = function(grunt){
 			},
 			files: ['dev/**/*.js, !dev/**/*.min.js']
 		},
+		sass: {
+			dist: {
+				options: {
+					style: 'expanded'
+				},
+				files: {
+					'dev/main.css' : 'dev/main.scss'
+				}
+			}
+		},
 		uglify: {
 			build: {
 				options: {
@@ -86,6 +96,10 @@ module.exports = function(grunt){
 				files: ['dev/**/*.css','!dev/**/*.min.css'],
 				tasks: ['cssmin:target']
 			},
+			sass: {
+				files: ['dev/main.scss'],
+				tasks: ['sass:dist']
+			},
 			uglify: {
 				files: ['dev/**/*.js','!dev/**/*.min.js'],
 				tasks: ['uglify:build']
@@ -98,6 +112,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
