@@ -20,11 +20,9 @@ define([
 			this.$current = $('#weather-current');
 			
 			this.geocodes = new Geocodes();
-			//this.listenTo(this.geocodes, 'sync', this.addGeocode);
 			this.listenTo(this.geocodes, 'change:ready', this.addGeocode);
 
 			this.weathers = new Weathers();
-			//this.listenTo(this.weathers, 'sync', this.addWeather);
 			this.listenTo(this.weathers, 'change:ready', this.addWeather);
 		},
 		render: function() {
@@ -75,7 +73,7 @@ define([
 			});
 		},
 		validateInput: function() {
-			if (!isDebug) {
+			if (isDebug) {
 				this.$input[0].value = 'San Fransokyo, CA';
 				this.retrieveCoordinates(['San Fransokyo','CA']);
 				return;
@@ -97,10 +95,6 @@ define([
 				console.log('reading input');
 				this.validateInput();
 			}
-		},
-		report: function(e) {
-			console.log("Reporting: ")
-			console.log(e);
 		}
 	});
 
