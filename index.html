@@ -28,8 +28,11 @@
 	<script type="text/template" id="tmpl-current">
 		<div class="board">
 			<span class="current-hero cols-xs-4">
-
 				<span class="sky-icon <%= skyIcon %> cols-xs-2"></span>
+				<span class="tempRange">
+					<span class='max-temp'>Max: <%= maxTemp %></span>
+					<span class='min-temp'>Min: <%= minTemp %></span>
+				</span>
 				<span class="temp cols-xs-2"><%= temperature %>&deg</span>
 			</span>
 			<span class="current-details">
@@ -40,10 +43,6 @@
 					<img class="wind-icon <%= windIcon %>">
 					<span class="wind-speed"><%= windSpeed %> <%= windUnits %></span>
 					<span class="wind-direction <%= windDirection %>"></span>
-				</div>
-				<div>
-					<span class='max-temp'>Max: <%= maxTemp %></span>
-					<span class='min-temp'>Min: <%= minTemp %></span>
 				</div>
 			</span>
 		</div>

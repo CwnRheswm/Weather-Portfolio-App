@@ -54,10 +54,10 @@ define([
 			}
 			console.log(response);
 			this.set('skyIcon', response.currently.icon);
-			this.set('temperature', response.currently.temperature);
-			this.set('maxTemp', response.daily.data[0].temperatureMax);
-			this.set('minTemp', response.daily.data[0].temperatureMin);
-			this.set('windSpeed', response.currently.windSpeed);
+			this.set('temperature', Math.round( response.currently.temperature) );
+			this.set('maxTemp', Math.round( response.daily.data[0].temperatureMax) );
+			this.set('minTemp', Math.round( response.daily.data[0].temperatureMin) );
+			this.set('windSpeed', Math.round( response.currently.windSpeed) );
 			this.set('windDirection', response.currently.windBearing);
 			this.set('ready', true);
 			return response;

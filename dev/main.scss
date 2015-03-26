@@ -15,6 +15,7 @@ body {
 	color: #fff;
 	margin-left: 6.25%;
 	padding: 6px 0;
+	font: chalk;
 	border-image: url('../Images/chalk_button.png') 30 stretch;
 	border-width: 8px;
 	&:hover {
@@ -47,11 +48,20 @@ body {
 	position: relative;
 	text-align: center;
 }
-.temp{
+.tempRange{
 	position: absolute;
 	bottom: 0;
-	left:0;
-	width: 100%;
+	left: 0;
+	width:60%;
+	height:20%;
+	font-size: 2rem;
+}
+.temp{
+	position: absolute;
+	right: 0;
+	top: 15%;
+	width: 39%;
+	font-size: 4rem;
 }
 .current-details{
 	width:59%;
@@ -63,9 +73,9 @@ body {
 	height:80%;
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: -5%;
 	background-size: contain;
-	background-position: center;
+	background-position: left;
 	&.clear-day{
 		background-image: url("../Images/swirly_clear.png");
 	}
