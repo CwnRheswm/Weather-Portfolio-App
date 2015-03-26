@@ -47,25 +47,58 @@ body {
 	float: left;
 	position: relative;
 	text-align: center;
-}
-.tempRange{
+	.temp{
+		position: absolute;
+		right: 0;
+		top: 15%;
+		width: 39%;
+		font-size: 4rem;
+	}
+	.tempRange{
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	width:60%;
 	height:20%;
 	font-size: 2rem;
+		.max-temp{
+			background-position: left;
+			background-repeat: no-repeat;
+			background-size: contain;
+			text-align: right;
+			width: 25%;
+			float: left;
+		}
+		.divider{
+			float: left;
+			width: 20%;
+			font-size: 3rem;
+		}
+		.min-temp{
+			background-position: left;
+			background-repeat: no-repeat;
+			background-size: contain;
+			text-align: right;
+			width: 25%;
+			float: left;
+			padding-top: 10%;
+		}
+	}
 }
-.temp{
-	position: absolute;
-	right: 0;
-	top: 15%;
-	width: 39%;
-	font-size: 4rem;
-}
+
 .current-details{
 	width:59%;
 	float: left;
+	.location{
+		font-size: 2rem;
+		width:100%;
+		height: 20%;
+		overflow: hidden;
+		text-align: center;
+	}
+	.coordinates{
+		text-align: right;
+	}
 }
 .sky-icon{
 	background-repeat: no-repeat;

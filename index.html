@@ -30,14 +30,16 @@
 			<span class="current-hero cols-xs-4">
 				<span class="sky-icon <%= skyIcon %> cols-xs-2"></span>
 				<span class="tempRange">
-					<span class='max-temp'>Max: <%= maxTemp %></span>
-					<span class='min-temp'>Min: <%= minTemp %></span>
+					<span class='max-temp'><%= maxTemp %></span>
+					<span class="divider">/</span>
+					<span class='min-temp'><%= minTemp %></span>
 				</span>
 				<span class="temp cols-xs-2"><%= temperature %>&deg</span>
 			</span>
 			<span class="current-details">
 				<div>
-					<h4 class='location'><%= city %>, <%= state %>: <%= latitude %>, <%= longitude %></h4>
+					<div class='location'><%= city %>, <%= state %></div>
+					<div class='coordinates'><%= latitude %>, <%= longitude %></div>
 				</div>
 				<div>
 					<img class="wind-icon <%= windIcon %>">

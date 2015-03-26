@@ -44,8 +44,8 @@ define([
 				console.log("City: "+this.weathers.models[0].get('city'));
 				this.weathers.models[0].set('city', input.get('city'));
 				this.weathers.models[0].set('state', input.get('state'));
-				this.weathers.models[0].set('latitude', input.get('latitude'));
-				this.weathers.models[0].set('longitude', input.get('longitude'));
+				this.weathers.models[0].set('latitude', Math.round(input.get('latitude')));
+				this.weathers.models[0].set('longitude', Math.round(input.get('longitude')));
 				this.weathers.models[0].sync();
 				console.log("City 2: "+this.weathers.models[0].get('city'));
 				return;
@@ -54,8 +54,8 @@ define([
 			this.weathers.create({
 				city: input.get('city'),
 				state: input.get('state'),
-				latitude: input.get('latitude'),
-				longitude: input.get('longitude'),
+				latitude: Math.round(input.get('latitude')),
+				longitude: Math.round(input.get('longitude')),
 			});
 		},
 		retrieveCoordinates: function(location) {
