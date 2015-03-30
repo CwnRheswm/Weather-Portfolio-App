@@ -8,26 +8,28 @@
 <body>
 	<div class='container'>
 		<section id='weather-app'>
-			<div class="board">
-				<div class="form-group">
-					<input id='city-search' class="form-control" placeholder='Enter A City' autofocus>
-				</div>
-				<div class="container">
-					<div class="span12">
-						<a href='#' id="current-btn" class="btn btn-chalk btn-medium col-xs-3">Current</a>
-						<a href='#' id='forecast-btn' class='btn btn-chalk btn-medium col-xs-3'>Forecast</a>
-						<a href="#" id='history-btn' class='btn btn-chalk btn-medium col-xs-3'>History</a>
+			<div class="searchForm">
+				<div class="board">
+					<div class="form-group">
+						<input id='city-search' class="form-control" placeholder='Enter A City' autofocus>
 					</div>
-				</div>
+					<div class="container">
+						<div class="span12">
+							<a href='#' id="current-btn" class="btn btn-chalk btn-medium col-xs-3">Current</a>
+							<a href='#' id='forecast-btn' class='btn btn-chalk btn-medium col-xs-3'>Forecast</a>
+							<a href="#" id='history-btn' class='btn btn-chalk btn-medium col-xs-3'>History</a>
+						</div>
+					</div>
+				</div>	
 			</div>
-			<div id="weather-current"></div>
+			<div id="weather-current" class="closed"></div>
 		</section>
 	</div>
 
 	<!--Template for Current Weather Board-->
 	<script type="text/template" id="tmpl-current">
 		<div class="board">
-			<span class="current-hero cols-xs-4">
+			<span class="current-hero cols-xs-3">
 				<span class="sky-icon <%= skyIcon %> cols-xs-2"></span>
 				<span class="tempRange">
 					<span class='max-temp'><%= maxTemp %></span>
@@ -36,15 +38,14 @@
 				</span>
 				<span class="temp cols-xs-2"><%= temperature %>&deg</span>
 			</span>
+			<div class='location'><%= city %>, <%= state %></div>
 			<span class="current-details">
 				<div>
-					<div class='location'><%= city %>, <%= state %></div>
 					<div class='coordinates'><%= latitude %>, <%= longitude %></div>
 				</div>
-				<div>
-					<img class="wind-icon <%= windIcon %>">
-					<span class="wind-speed"><%= windSpeed %> <%= windUnits %></span>
-					<span class="wind-direction <%= windDirection %>"></span>
+				<div class="wind-details">
+					<span class="wind-icon <%= windSpeed %> wind-direction <%=windDirection %>"></span>
+					<span class="wind-knots"><%= windKnots %> mph<%= windUnits %></span>
 				</div>
 			</span>
 		</div>

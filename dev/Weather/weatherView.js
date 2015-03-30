@@ -4,7 +4,7 @@ define([
 	'backbone'
 ], function($,_,Backbone){
 	var WeatherView = Backbone.View.extend({
-		tagName: 'div',
+		
 		template: _.template($('#tmpl-current').html()),
 		initialize: function() {
 			this.listenTo(this.model, 'change', this.render);

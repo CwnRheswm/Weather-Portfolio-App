@@ -36,6 +36,8 @@ define([
 		addWeather: function(weather) {
 			var view = new WeatherView({ model: weather });
 			this.$current.append(view.render().el);
+			this.$current[0].classList.remove("closed");
+			this.$current[0].classList.add("opened");
 		},
 		addGeocode: function(geocode) {
 			var view,
