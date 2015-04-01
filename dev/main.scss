@@ -7,10 +7,15 @@ body {
 	background-color: #F0EAD6;
 	font-family: 'chalk';
 	color: #fff;
-	width: 400px;
 }
 .container {
 	padding: 0;
+	width:100%;
+}
+#weather-app{
+	width:400px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .btn{
 	color: #fff;
@@ -19,15 +24,20 @@ body {
 	font: chalk;
 	border-image: url('../Images/chalk_button.png') 30 stretch;
 	border-width: 8px;
-	&:hover {
+	
+	&:focus{
+		color: #fff;
+	};
+	&:active,&.activated {
+		border-image: url("../Images/chalk_button_active.png") 30 stretch;
+		font-weight: 900;
+		color: #fff;
+	}
+	&:hover { 
 		border-image: url("../Images/chalk_button_hover.png") 30 stretch;
 		color: #fcc845;
 	}
-	&:active {
-		border-image: url("../Images/chalk_button_active.png") 30 stretch;
-		font-weight: 900;
-	}
-};
+}
 .board {
 	padding:2% 4%;
 	background-image: url("../Images/slate_board.png");
@@ -47,6 +57,7 @@ body {
 	transform-style: preserve-3d;
 	backface-visibility: hidden;
 	transition: transform 2s ease;
+	transform: rotateX(90deg);
 	&.closed{
 		transform: rotateX(90deg);
 	}
