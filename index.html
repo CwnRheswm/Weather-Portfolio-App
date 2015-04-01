@@ -54,11 +54,15 @@
 
 	<!--Template for Forecast Weather Board-->
 	<script type="text/template" id="tmpl-forecast">
-		<span class="sky-icon <%= skyIcon %>"></span>
+		<div class="board"></div>
 	</script>
 
 	<!--Template for Forecast Board Parts-->
 	<script type="text/template" id="tmpl-forecast-day">
+		<span class="skyIcon small <%= skyIcon %>"></span>
+		<span class="maxTemp small"><%= maxTemp %></span>
+		<span class="divider">/</span>
+		<span class="minTemp small"><%= minTemp %></span>
 	</script>
 
 	<!--Template for History Board-->

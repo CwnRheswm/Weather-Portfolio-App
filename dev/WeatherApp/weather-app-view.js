@@ -5,8 +5,8 @@ define([
 	'../Geocode/geocodes.min',
 	'../Geocode/geocodeView.min',
 	'../Weather/weathers.min',
-	'../Weather/weatherView.min'
-], function($,_,Backbone,Geocodes,GeocodeView,Weathers,WeatherView){
+	'../Current/currentView.min'
+], function($,_,Backbone,Geocodes,GeocodeView,Weathers,CurrentView){
 	'use strict';
 	var weatherCurrent,
 		isDebug = window.location.hostname === 'localhost';
@@ -37,7 +37,7 @@ define([
 
 		},
 		addWeather: function(weather) {
-			var view = new WeatherView({ model: weather });
+			var view = new CurrentView({ model: weather });
 			this.$current.append(view.render().el);
 			//this.$current[0].classList.toggle("closed");
 			//this.$current[0].classList.toggle("opened");

@@ -5,17 +5,15 @@ define([
 ], function($,_,Backbone){
 	var isDebug = window.location.hostname === 'localhost';
 
-	var Forecast = Backbone.Model.extend({
-		defaults: {[
-			skyIcon: '',
-			maxTemp: 0,
-			minTemp: 0,
-			windIcon: '',
-			windKnots: 0,
-			windSpeed: 0,
-			windBearing: 0,
-			windDirection: 0
-		]},
-		
-	})
+	var ForecastView = Backbone.View.extend({
+		template: _.template($('#tmpl-forecast').html()),
+		initialize: function(){
+			this.listenTo(this.model, 'change', this.render);
+		},
+		render: function(){
+			this.$el.html(this.template(this.model.attributes));
+			return this;
+		}
+	});
+	return ForecastView;
 })

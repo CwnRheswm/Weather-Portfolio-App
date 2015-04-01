@@ -37,6 +37,7 @@ body {
 }
 .btn:hover {
   border-image: url("../Images/chalk_button_hover.png") 30 stretch;
+  border-color: #fcc845;
   color: #fcc845;
 }
 
