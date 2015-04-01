@@ -8,12 +8,15 @@ define([
 	'../Weather/weatherView.min'
 ], function($,_,Backbone,Geocodes,GeocodeView,Weathers,WeatherView){
 	'use strict';
-	var isDebug = window.location.hostname === 'localhost';
+	var weatherCurrent,
+		isDebug = window.location.hostname === 'localhost';
 	var WeatherAppView = Backbone.View.extend({
 		el: '#weather-app',
 		events: {
 			'keypress #city-search' : 'checkForEnter',
-			'click #current-btn' : 'validateInput'
+			'click #current-btn' : 'validateInput',
+			'click #forecast-btn' : 'validateInput',
+			'click #history-btn' : 'validateInput'
 		},
 		initialize: function() {
 			this.$input = this.$('#city-search');
@@ -36,20 +39,18 @@ define([
 		addWeather: function(weather) {
 			var view = new WeatherView({ model: weather });
 			this.$current.append(view.render().el);
-			this.$current[0].classList.remove("closed");
-			this.$current[0].classList.add("opened");
+			//this.$current[0].classList.toggle("closed");
+			this.$current[0].classList.toggle("opened");
 		},
 		addGeocode: function(geocode) {
 			var view,
 				input = this.geocodes.models[0];
 			if(this.weathers.length == 1){
-				console.log("City: "+this.weathers.models[0].get('city'));
 				this.weathers.models[0].set('city', input.get('city'));
 				this.weathers.models[0].set('state', input.get('state'));
 				this.weathers.models[0].set('latitude', Math.round(input.get('latitude')));
 				this.weathers.models[0].set('longitude', Math.round(input.get('longitude')));
 				this.weathers.models[0].sync();
-				console.log("City 2: "+this.weathers.models[0].get('city'));
 				return;
 			}
 			view = new GeocodeView({ model: geocode });
@@ -61,11 +62,10 @@ define([
 			});
 		},
 		retrieveCoordinates: function(location) {
-			console.log(this.geocodes.models.length);
+			
 			if(this.geocodes.length === 1){
 				this.geocodes.models[0].set('city', location[0].trim());
 				this.geocodes.models[0].set('state', location[1].trim());
-				console.log(this.geocodes.models[0]);
 				this.geocodes.models[0].sync();
 				return;
 			};
@@ -74,10 +74,13 @@ define([
 				state: location[1].trim()
 			});
 		},
-		validateInput: function() {
+		validateInput: function(e) {
+			$("#weather-current")[0].classList.add('opened');
+			
 			if (isDebug) {
 				this.$input[0].value = 'San Fransokyo, CA';
 				this.retrieveCoordinates(['San Fransokyo','CA']);
+				e.target.classList.toggle('activated');
 				return;
 			}
 			var searchInput = this.$input.val().trim();
@@ -90,11 +93,12 @@ define([
 				alert('Enter The City and State in the form "City, State"');
 				return;
 			}
+			$('#current-btn')[0].classList.toggle('activated');
+				
 			this.retrieveCoordinates(location);
 		},
 		checkForEnter: function(e) {
 			if (e.which === ENTER_KEY) {
-				console.log('reading input');
 				this.validateInput();
 			}
 		}

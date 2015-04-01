@@ -47,7 +47,6 @@ define([
 				url: that.url(),
 				processDate: false,
 			}, options);
-			console.log(that.url());
 			return $.ajax(params);
 		},
 		parse: function(response) {
@@ -56,7 +55,6 @@ define([
 			if (!response) {
 				return;
 			}
-			console.log(response);
 			this.set('skyIcon', response.currently.icon);
 			this.set('temperature', Math.round( response.currently.temperature) );
 			this.set('maxTemp', Math.round( response.daily.data[0].temperatureMax) );

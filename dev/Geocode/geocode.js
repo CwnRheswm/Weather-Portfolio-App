@@ -18,7 +18,6 @@ define([
 			return this.urlRoot + this.get('city') + ',+' + this.get('state') + '&key=AIzaSyABqQlhH2mpwyBRQG91i2t6vpNz3L3OMQE';
 		},
 		sync: function(method, model, options) {
-			console.log('geocode syncing');
 			if(isDebug){
 				var sampleLocation = {
 					'status': 'OK', 
@@ -44,8 +43,6 @@ define([
 			return $.ajax(params);
 		},
 		parse: function(response){
-			console.log("Response: ");
-			console.log(response);
 			if(response.status !== 'OK') {
 				return;
 			}
