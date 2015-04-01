@@ -43,6 +43,9 @@ Temporary Items
 .apdisk
 
 node_modules/grunt/
+node_modules/grunt-concat-css/
+node_modules/grunt-contrib-concat/
+node_modules/grunt-contrib-connect/
 node_modules/grunt-contrib-cssmin/
 node_modules/grunt-contrib-jshint/
 node_modules/grunt-contrib-sass/

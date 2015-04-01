@@ -10,6 +10,13 @@ body {
 
 .container {
   padding: 0;
+  width: 100%;
+}
+
+#weather-app {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn {
@@ -20,13 +27,17 @@ body {
   border-image: url("../Images/chalk_button.png") 30 stretch;
   border-width: 8px;
 }
+.btn:focus {
+  color: #fff;
+}
+.btn:active, .btn.activated {
+  border-image: url("../Images/chalk_button_active.png") 30 stretch;
+  font-weight: 900;
+  color: #fff;
+}
 .btn:hover {
   border-image: url("../Images/chalk_button_hover.png") 30 stretch;
   color: #fcc845;
-}
-.btn:active {
-  border-image: url("../Images/chalk_button_active.png") 30 stretch;
-  font-weight: 900;
 }
 
 .board {
@@ -49,6 +60,7 @@ body {
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transition: transform 2s ease;
+  transform: rotateX(90deg);
 }
 #weather-current.closed {
   transform: rotateX(90deg);
