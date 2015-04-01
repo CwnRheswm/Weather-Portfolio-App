@@ -40,7 +40,7 @@ define([
 			var view = new WeatherView({ model: weather });
 			this.$current.append(view.render().el);
 			//this.$current[0].classList.toggle("closed");
-			this.$current[0].classList.toggle("opened");
+			//this.$current[0].classList.toggle("opened");
 		},
 		addGeocode: function(geocode) {
 			var view,
@@ -75,7 +75,7 @@ define([
 			});
 		},
 		validateInput: function(e) {
-			$("#weather-current")[0].classList.add('opened');
+			$('#weather-current')[0].classList.toggle('opened');
 			
 			if (isDebug) {
 				this.$input[0].value = 'San Fransokyo, CA';
@@ -93,13 +93,13 @@ define([
 				alert('Enter The City and State in the form "City, State"');
 				return;
 			}
-			$('#current-btn')[0].classList.toggle('activated');
+			e.target.classList.toggle('activated');
 				
 			this.retrieveCoordinates(location);
 		},
 		checkForEnter: function(e) {
 			if (e.which === ENTER_KEY) {
-				this.validateInput();
+				this.validateInput($("#current-btn"));
 			}
 		}
 	});
