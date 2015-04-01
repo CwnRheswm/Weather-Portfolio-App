@@ -48,4 +48,7 @@ node_modules/grunt-contrib-jshint/
 node_modules/grunt-contrib-sass/
 node_modules/grunt-contrib-uglify/
 node_modules/grunt-contrib-watch/
+node_modules/grunt-concat-css/
+node_modules/grunt-contrib-concat/
+node_modules/grunt-contrib-connect/
 node_modules/sass/
