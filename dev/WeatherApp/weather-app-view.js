@@ -91,7 +91,7 @@ define([
 			//Push this into another area, allow for c/f difference
 			//$('#weather-current')[0].classList.toggle('opened');
 			
-			if (!isDebug) {
+			if (isDebug) {
 				this.$input[0].value = 'San Fransokyo, CA';
 				this.retrieveCoordinates(['San Fransokyo','CA']);
 				console.log(e);
