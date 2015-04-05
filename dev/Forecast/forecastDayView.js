@@ -3,11 +3,9 @@ define([
 	'underscore',
 	'backbone'
 ], function($,_,Backbone){
-	'use strict'
-	var isDebug = window.location.hostname === 'localhost';
-
-	var ForecastView = Backbone.View.extend({
-		template: _.template($('#tmpl-forecast').html()),
+	'use strict';
+	var ForecastPerDayView = Backbone.View.extend({
+		template: _.template($('#tmpl-forecast-day').html()),
 		initialize: function(){
 			this.listenTo(this.model, 'change', this.render);
 		},
@@ -15,6 +13,5 @@ define([
 			this.$el.html(this.template(this.model.attributes));
 			return this;
 		}
-	});
-	return ForecastView;
+	})
 })

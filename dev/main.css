@@ -58,16 +58,29 @@ body {
 
 #weather-current {
   height: 0rem;
-  transform-style: preserve-3d;
+  transform-origin: center top;
   backface-visibility: hidden;
-  transition: transform 2s ease;
-  transform: rotateX(90deg);
-}
-#weather-current.closed {
+  transition: transform 2s ease, height 2s ease;
   transform: rotateX(90deg);
 }
 #weather-current.opened {
+  height: 16rem;
   transform: rotateX(0deg);
+}
+
+#weather-forecast {
+  height: 0rem;
+  transform-origin: center top;
+  backface-visibility: hidden;
+  transition: transform 2s ease, height 2s ease;
+  transform: rotateX(90deg);
+}
+#weather-forecast.opened {
+  height: 20rem;
+  transform: rotateX(0deg);
+}
+#weather-forecast .board {
+  height: 20rem;
 }
 
 .current-hero {

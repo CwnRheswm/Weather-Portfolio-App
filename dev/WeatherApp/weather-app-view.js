@@ -5,8 +5,9 @@ define([
 	'../Geocode/geocodes.min',
 	'../Geocode/geocodeView.min',
 	'../Weather/weathers.min',
-	'../Current/currentView.min'
-], function($,_,Backbone,Geocodes,GeocodeView,Weathers,CurrentView){
+	'../Current/currentView.min',
+	'../Forecast/forecastView.min'
+], function($,_,Backbone,Geocodes,GeocodeView,Weathers,CurrentView,ForecastView){
 	'use strict';
 	var weatherCurrent,
 		isDebug = window.location.hostname === 'localhost';
@@ -14,13 +15,23 @@ define([
 		el: '#weather-app',
 		events: {
 			'keypress #city-search' : 'checkForEnter',
-			'click #current-btn' : 'validateInput',
-			'click #forecast-btn' : 'validateInput',
-			'click #history-btn' : 'validateInput'
+			'click #current-btn' : function(e) {
+				this.validateInput(e);
+				this.toggleCurrentWeatherBoard(e);
+			},
+			'click #forecast-btn' : function(e){
+				this.validateInput(e);
+				this.toggleForecastWeatherBoard(e);
+			},
+			'click #history-btn' : function(e){
+				this.validateInput(e);
+				this.toggleHistoryWeatherBoard(e);
+			}
 		},
 		initialize: function() {
 			this.$input = this.$('#city-search');
 			this.$current = $('#weather-current');
+			this.$forecast = $('#weather-forecast');
 			
 			this.geocodes = new Geocodes();
 			this.listenTo(this.geocodes, 'change:ready', this.addGeocode);
@@ -37,8 +48,10 @@ define([
 
 		},
 		addWeather: function(weather) {
-			var view = new CurrentView({ model: weather });
-			this.$current.append(view.render().el);
+			//var currentView = new CurrentView({ model: current });
+			//this.$current.append(currentView.render().el);
+			var forecastView = new ForecastView({ model: weather });
+			this.$forecast.append(forecastView.render().el);
 			//this.$current[0].classList.toggle("closed");
 			//this.$current[0].classList.toggle("opened");
 		},
@@ -53,7 +66,7 @@ define([
 				this.weathers.models[0].sync();
 				return;
 			}
-			view = new GeocodeView({ model: geocode });
+			//view = new GeocodeView({ model: geocode });
 			this.weathers.create({
 				city: input.get('city'),
 				state: input.get('state'),
@@ -75,7 +88,8 @@ define([
 			});
 		},
 		validateInput: function(e) {
-			$('#weather-current')[0].classList.toggle('opened');
+			//Push this into another area, allow for c/f difference
+			//$('#weather-current')[0].classList.toggle('opened');
 			
 			if (isDebug) {
 				this.$input[0].value = 'San Fransokyo, CA';
@@ -101,6 +115,15 @@ define([
 			if (e.which === ENTER_KEY) {
 				this.validateInput($("#current-btn"));
 			}
+		},
+		toggleCurrentWeatherBoard: function(){
+			this.$current[0].classList.toggle('opened');
+		},
+		toggleForecastWeatherBoard: function(){
+			this.$forecast[0].classList.toggle('opened');
+		},
+		toggleHistoryWeatherBoard: function(){
+			this.$history[0].classList.toggle('opened');
 		}
 	});
 

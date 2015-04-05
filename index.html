@@ -23,7 +23,9 @@
 					</div>
 				</div>	
 			</div>
-			<div id="weather-current"></div>
+			<div id="weather-current" class="weather-board"></div>
+			<div id="weather-forecast" class="weather-board"></div>
+			<div id="weather-history" class="weather-board"></div>
 		</section>
 	</div>
 
@@ -31,22 +33,22 @@
 	<script type="text/template" id="tmpl-current">
 		<div class="board">
 			<span class="current-hero cols-xs-3">
-				<span class="sky-icon <%= skyIcon %> cols-xs-2"></span>
+				<span class="sky-icon <%= current.icon %> cols-xs-2"></span>
 				<span class="tempRange">
-					<span class='max-temp'><%= maxTemp %></span>
+					<span class='max-temp'><%= tempMax %></span>
 					<span class="divider">/</span>
-					<span class='min-temp'><%= minTemp %></span>
+					<span class='min-temp'><%= tempMin %></span>
 				</span>
-				<span class="temp cols-xs-2"><%= temperature %>&deg</span>
+				<span class="temp cols-xs-2"><%= Math.round(current.temperature) %>&deg</span>
 			</span>
 			<div class='location'><%= city %>, <%= state %></div>
 			<span class="current-details">
 				<div>
-					<div class='coordinates'><%= latitude %>, <%= longitude %></div>
+					<div class='coordinates'><%= lat %>, <%= lng %></div>
 				</div>
 				<div class="wind-details">
-					<span class="wind-icon <%= windSpeed %> wind-direction <%=windDirection %>"></span>
-					<span class="wind-knots"><%= windKnots %> mph<%= windUnits %></span>
+					<span class="wind-icon <%= windSpeedIcon %> wind-direction <%=windDirection %>"></span>
+					<span class="wind-knots"><%= Math.round(current.windSpeed) %> mph</span>
 				</div>
 			</span>
 		</div>
@@ -54,15 +56,19 @@
 
 	<!--Template for Forecast Weather Board-->
 	<script type="text/template" id="tmpl-forecast">
-		<div class="board"></div>
+		<div class="board">
+			<div class="weather-forecast-day"></div>
+		</div>
 	</script>
 
 	<!--Template for Forecast Board Parts-->
 	<script type="text/template" id="tmpl-forecast-day">
-		<span class="skyIcon small <%= skyIcon %>"></span>
-		<span class="maxTemp small"><%= maxTemp %></span>
-		<span class="divider">/</span>
-		<span class="minTemp small"><%= minTemp %></span>
+		<span class="cols-xs-2 skyIcon small <%= skyIcon %>"></span>
+		<span class="cols-xs-2 maxTemp small"><%= maxTemp %></span>
+		<span class="cols-xs-2 divider">/</span>
+		<span class="cols-xs-2 minTemp small"><%= minTemp %></span>
+		<span class="cols-xs-2 wind-icon <%=windSpeed %> wind-direction <%= windDirection %> small"></span>
+		<span class="cols-xs-2 wind-knots"><%= windKnots %> mph</span>
 	</script>
 
 	<!--Template for History Board-->

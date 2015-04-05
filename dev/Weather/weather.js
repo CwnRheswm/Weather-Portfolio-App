@@ -1,8 +1,11 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone'
-], function($,_,Backbone){
+	'backbone',
+	'../Current/current.min',
+	'../Current/currentView.min'
+], function($,_,Backbone,Current,CurrentView){
+	'use strict';
 	var isDebug = window.location.hostname === 'localhost';
 	var Weather = Backbone.Model.extend({
 		defaults: {
@@ -36,7 +39,9 @@ define([
 				var sampleWeather =  
 				{"latitude":34.4480495,"longitude":-119.242889,"timezone":"America/Los_Angeles","offset":-7,
 				"currently":{"time":1427145438,"summary":"Clear","icon":"clear-day","precipIntensity":0,"precipProbability":0,"temperature":69.13,"apparentTemperature":69.13,"dewPoint":51.59,"humidity":0.54,"windSpeed":26.05,"windBearing":120,"visibility":9.99,"cloudCover":0.06,"pressure":1019.88,"ozone":331.51},
-				"minutely":{"data":[{"time":1427145420,"precipIntensity":0,"precipProbability":0},{"time":1427145480,"precipIntensity":0,"precipProbability":0}]},
+				"minutely":{"data":[
+					{"time":1427145420,"precipIntensity":0,"precipProbability":0},
+					{"time":1427145480,"precipIntensity":0,"precipProbability":0}]},
 				"hourly":{"summary":"Partly cloudy starting in the evening.","icon":"partly-cloudy-night","data":[
 					{"time":1427094000,"summary":"Clear","icon":"clear-night","precipIntensity":0,"precipProbability":0,"temperature":52.32,"apparentTemperature":52.32,"dewPoint":45.98,"humidity":0.79,"windSpeed":3.25,"windBearing":319,"visibility":9.04,"cloudCover":0.18,"pressure":1021.12,"ozone":328.7},
 					{"time":1427097600,"summary":"Clear","icon":"clear-night","precipIntensity":0,"precipProbability":0,"temperature":51.68,"apparentTemperature":51.68,"dewPoint":45.29,"humidity":0.79,"windSpeed":4.19,"windBearing":344,"visibility":9.41,"cloudCover":0.12,"pressure":1021.04,"ozone":327.58},
@@ -86,53 +91,68 @@ define([
 		},
 		parse: function(response) {
 			var windBearing,
-				windKnots;
+				windSpeed;
 			if (!response) {
 				return;
 			}
+			var current = new Current();
+			current.set('city', this.get('city'));
+			current.set('state', this.get('state'));
+			current.set('lat', this.get('latitude'));
+			current.set('lng', this.get('longitude'));
+			current.set('current', response.currently);
+			current.set('tempMin', Math.round(response.daily.data[0].temperatureMin));
+			current.set('tempMax', Math.round(response.daily.data[0].temperatureMax));
+			this.set('forecast', response.daily);
+
+			/*
 			this.set('skyIcon', response.currently.icon);
 			this.set('temperature', Math.round( response.currently.temperature) );
 			this.set('maxTemp', Math.round( response.daily.data[0].temperatureMax) );
 			this.set('minTemp', Math.round( response.daily.data[0].temperatureMin) );
-			windKnots = Math.round(response.currently.windSpeed);
-			this.set('windKnots',windKnots);
+			*/
+			windSpeed = Math.round(response.currently.windSpeed);
+			current.set('windSpeed',windSpeed);
 
-			if (windKnots === 0){
-				this.set('windSpeed', 'sp0');
-			} else if(windKnots < 5){
-				this.set('windSpeed', 'sp5');
-			} else if (windKnots >= 5 && windKnots < 10) {
-				this.set('windSpeed', 'sp10');
-			} else if (windKnots >= 10 && windKnots < 15 ) {
-				this.set('windSpeed', 'sp15');
-			} else if (windKnots >= 15 && windKnots < 20 ) {
-				this.set('windSpeed', 'sp20');
-			} else if (windKnots >= 20 && windKnots < 50 ) {
-				this.set('windSpeed', 'sp50');
-			} else if (windKnots >= 50){
-				this.set('windSpeed', 'sp65');
+			if (windSpeed === 0){
+				current.set('windSpeedIcon', 'sp0');
+			} else if(windSpeed < 5){
+				current.set('windSpeedIcon', 'sp5');
+			} else if (windSpeed >= 5 && windSpeed < 10) {
+				current.set('windSpeedIcon', 'sp10');
+			} else if (windSpeed >= 10 && windSpeed < 15 ) {
+				current.set('windSpeedIcon', 'sp15');
+			} else if (windSpeed >= 15 && windSpeed < 20 ) {
+				current.set('windSpeedIcon', 'sp20');
+			} else if (windSpeed >= 20 && windSpeed < 50 ) {
+				current.set('windSpeedIcon', 'sp50');
+			} else if (windSpeed >= 50){
+				current.set('windSpeedIcon', 'sp65');
 			};
 
 			windBearing = response.currently.windBearing;
+			current.set('windBearing',windBearing);
 
 			if (windBearing <= 22.5 || windBearing > 337.5 ) {
-				this.set('windDirection',"north");	
+				current.set('windDirection',"north");	
 			} else if (windBearing > 22.5 && windBearing <= 67.5) {
-				this.set("windDirection","northeast");
+				current.set("windDirection","northeast");
 			} else if (windBearing > 67.5 && windBearing <= 112.5) {
-				this.set('windDirection','east');
+				current.set('windDirection','east');
 			} else if (windBearing > 112.5 && windBearing <= 157.5) {
-				this.set("windDirection",'southeast');
+				current.set("windDirection",'southeast');
 			} else if (windBearing > 157.5 && windBearing <= 202.5) {
-				this.set('windDirection','south');
+				current.set('windDirection','south');
 			} else if (windBearing > 202.5 && windBearing <= 247.5) {
-				this.set('windDirection','southwest');
+				current.set('windDirection','southwest');
 			} else if (windBearing > 247.5 && windBearing <= 292.5) {
-				this.set('windDirection','west');
+				current.set('windDirection','west');
 			} else if (windBearing > 292.5 && windBearing <= 337.5) {
-				this.set('windDirection','northwest');
+				current.set('windDirection','northwest');
 			}
-
+			new CurrentView ({ model: current });
+			current.set('ready',!current.get('ready'));
+			console.log(current);
 			this.set('ready', true);
 
 			return response;
