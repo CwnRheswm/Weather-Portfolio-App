@@ -91,9 +91,12 @@ define([
 			//Push this into another area, allow for c/f difference
 			//$('#weather-current')[0].classList.toggle('opened');
 			
-			if (isDebug) {
+			if (!isDebug) {
 				this.$input[0].value = 'San Fransokyo, CA';
 				this.retrieveCoordinates(['San Fransokyo','CA']);
+				console.log(e);
+				console.log(e.target.classList);
+
 				e.target.classList.toggle('activated');
 				return;
 			}
@@ -107,13 +110,17 @@ define([
 				alert('Enter The City and State in the form "City, State"');
 				return;
 			}
+			console.log(e);
+			console.log(e.target);
 			e.target.classList.toggle('activated');
 				
 			this.retrieveCoordinates(location);
 		},
 		checkForEnter: function(e) {
 			if (e.which === ENTER_KEY) {
-				this.validateInput($("#current-btn"));
+				//e.target = $("#current-btn");
+				//this.validateInput(e);
+				$('#current-btn').trigger("click");
 			}
 		},
 		toggleCurrentWeatherBoard: function(){
