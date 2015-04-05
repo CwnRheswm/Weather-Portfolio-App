@@ -75,14 +75,15 @@ define([
 			});
 		},
 		retrieveCoordinates: function(location) {
-			if(this.geocodes.models[0].get('city') === location[0].trim() &&
-				this.geocodes.models[0].get('state') === location[1].trim()){
-				return;
-			}
+			var geo = this.geocodes.models[0];
 			if(this.geocodes.length === 1){
-				this.geocodes.models[0].set('city', location[0].trim());
-				this.geocodes.models[0].set('state', location[1].trim());
-				this.geocodes.models[0].sync();
+				if(geo.get('city') === location[0].trim() &&
+					geo.get('state') === location[1].trim()){
+					return;
+				}
+				geo.set('city', location[0].trim());
+				geo.set('state', location[1].trim());
+				geo.sync();
 				return;
 			};
 			this.geocodes.create({
